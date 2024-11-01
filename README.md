@@ -1,32 +1,32 @@
-Cake Shop Store Dashboard
-Table of Contents
-Introduction
-Prerequisites
-Installation
-Database Setup
-Environment Variables
-Running the Application
-Testing the API
-Features
-Screenshots
-Contributing
-License
-Introduction
+# Cake Shop Store Dashboard
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Database Setup](#database-setup)
+- [Environment Variables](#environment-variables)
+- [Running the Application](#running-the-application)
+- [Testing the API](#testing-the-api)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
 This repository contains the backend system for a Cake Shop Store Dashboard built with Next.js, TypeScript, and Prisma. The dashboard allows users to add, view, and manage cake products through a REST API.
 
-Prerequisites
+## Prerequisites
 Before you begin, ensure you have met the following requirements:
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) package manager
+- A Neon.tech account for database setup
+- Basic knowledge of TypeScript and RESTful APIs
 
-Node.js (v14 or higher)
-npm or yarn package manager
-A Neon.tech account for database setup
-Basic knowledge of TypeScript and RESTful APIs
-Installation
-Clone the repository:
-
-bash
-Copy code
-git clone https://github.com/yourusername/cake-shop-dashboard.git
+## Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/cake-shop-dashboard.git
 Replace yourusername with your GitHub username.
 
 Navigate to the project directory:
