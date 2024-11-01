@@ -1,184 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake Shop Store Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        h1 {
-            font-size: 2em;
-        }
-        h2 {
-            margin-top: 20px;
-            font-size: 1.5em;
-        }
-        h3 {
-            margin-top: 15px;
-            font-size: 1.2em;
-        }
-        code {
-            background-color: #eaeaea;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        pre {
-            background-color: #eaeaea;
-            padding: 10px;
-            border-radius: 4px;
-            overflow: auto;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
+# Cake Shop Dashboard Backend
 
-    <h1>Cake Shop Store Dashboard</h1>
+## Project Overview
+This is a backend system for a Cake Shop Store Dashboard, featuring full CRUD operations for cake products using Next.js, Prisma, and a relational database.
 
-    <h2>Table of Contents</h2>
-    <ul>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#database-setup">Database Setup</a></li>
-        <li><a href="#environment-variables">Environment Variables</a></li>
-        <li><a href="#running-the-application">Running the Application</a></li>
-        <li><a href="#testing-the-api">Testing the API</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#screenshots">Screenshots</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#license">License</a></li>
-    </ul>
+## Prerequisites
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or later)
+- npm (v9 or later)
+- Git
+- GitHub account
 
-    <h2 id="introduction">Introduction</h2>
-    <p>This repository contains the backend system for a Cake Shop Store Dashboard built with Next.js, TypeScript, and Prisma. The dashboard allows users to add, view, and manage cake products through a REST API.</p>
+## Technology Stack
+- Next.js
+- TypeScript
+- Prisma ORM
+- Neon.tech (PostgreSQL)
 
-    <h2 id="prerequisites">Prerequisites</h2>
-    <p>Before you begin, ensure you have met the following requirements:</p>
-    <ul>
-        <li><a href="https://nodejs.org/">Node.js</a> (v14 or higher)</li>
-        <li><a href="https://www.npmjs.com/">npm</a> or <a href="https://yarnpkg.com/">yarn</a> package manager</li>
-        <li>A Neon.tech account for database setup</li>
-        <li>Basic knowledge of TypeScript and RESTful APIs</li>
-    </ul>
+## Clone the Repository
+```bash
+git clone https://github.com/Deeeeeeepak/cake-shop-dashboard.git
+cd cake-shop-dashboard
+```
 
-    <h2 id="installation">Installation</h2>
-    <ol>
-        <li><strong>Clone the repository:</strong>
-            <pre><code>git clone https://github.com/yourusername/cake-shop-dashboard.git</code></pre>
-            Replace <code>yourusername</code> with your GitHub username.
-        </li>
-        <li><strong>Navigate to the project directory:</strong>
-            <pre><code>cd cake-shop-dashboard</code></pre>
-        </li>
-        <li><strong>Install dependencies:</strong>
-            <pre><code>npm install</code></pre>
-            or if you prefer yarn:
-            <pre><code>yarn install</code></pre>
-        </li>
-    </ol>
+## Database Setup with Neon.tech
 
-    <h2 id="database-setup">Database Setup</h2>
-    <ol>
-        <li><strong>Sign up for an account at <a href="https://neon.tech/">Neon.tech</a> and create a new database.</strong></li>
-        <li><strong>Set up Prisma:</strong>
-            <ol>
-                <li>Run the following command to initialize Prisma:
-                    <pre><code>npx prisma init</code></pre>
-                </li>
-                <li>Configure your <code>prisma/schema.prisma</code> file to use PostgreSQL with the connection string provided by Neon.tech.</li>
-                <li>Example <code>schema.prisma</code>:
-                    <pre><code>datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-}
+### 1. Create Neon.tech Account
+1. Visit [Neon.tech](https://neon.tech)
+2. Sign up for a free account
+3. Create a new project
 
-generator client {
-    provider = "prisma-client-js"
-}
+### 2. Database Connection
+1. In Neon.tech dashboard, go to "Connection Details"
+2. Copy your PostgreSQL connection string
 
-model Product {
-    id          Int     @id @default(autoincrement())
-    name        String
-    description String?
-    price       Float
-    stock       Int
-    imageUrl    String?
-}
-                    </code></pre>
-                </li>
-            </ol>
-        </li>
-        <li><strong>Run migrations to set up the database:</strong>
-            <pre><code>npx prisma migrate dev --name init</code></pre>
-        </li>
-        <li><strong>Seed the database with sample data (optional):</strong>
-            <ol>
-                <li>Create a <code>prisma/seed.ts</code> file to add sample products.</li>
-                <li>Run the seed command:
-                    <pre><code>npx ts-node prisma/seed.ts</code></pre>
-                </li>
-            </ol>
-        </li>
-    </ol>
+### 3. Configure Environment Variables
+Create a `.env` file in the project root with the following content:
+```env
+DATABASE_URL="postgresql://[USERNAME]:[PASSWORD]@[ENDPOINT]/[DATABASE]?sslmode=require"
+```
 
-    <h2 id="environment-variables">Environment Variables</h2>
-    <p>Create a <code>.env</code> file in the root of the project with the following content:</p>
-    <pre><code>DATABASE_URL=your_neon_database_connection_string</code></pre>
-    <p>Replace <code>your_neon_database_connection_string</code> with the actual connection string from Neon.tech.</p>
+**Note:** Replace the placeholders with your actual Neon.tech connection details.
 
-    <h2 id="running-the-application">Running the Application</h2>
-    <ol>
-        <li>Start the Next.js application:
-            <pre><code>npm run dev</code></pre>
-            or
-            <pre><code>yarn dev</code></pre>
-        </li>
-        <li>Open your browser and navigate to <code>http://localhost:3000</code> to view the dashboard.</li>
-    </ol>
+## Installation
 
-    <h2 id="testing-the-api">Testing the API</h2>
-    <p>You can test the API using tools like Postman or CURL. Here are the endpoints you can test:</p>
-    <ul>
-        <li><strong>Add Product:</strong> <code>POST /api/products</code></li>
-        <li><strong>Get All Products:</strong> <code>GET /api/products</code></li>
-        <li><strong>Update Product:</strong> <code>PUT /api/products/:id</code></li>
-        <li><strong>Delete Product:</strong> <code>DELETE /api/products/:id</code></li>
-    </ul>
-    <p>Make sure to provide the necessary data in the request body for the respective endpoints.</p>
+### Install Dependencies
+```bash
+npm install
+```
 
-    <h2 id="features">Features</h2>
-    <ul>
-        <li><strong>Product Entry:</strong> Add new cake products with details such as name, description, price, stock quantity, and image URL.</li>
-        <li><strong>Product Retrieval:</strong> Retrieve all products with pagination support.</li>
-        <li><strong>Product Update:</strong> Update cake details as needed.</li>
-        <li><strong>Product Deletion:</strong> Remove products from the inventory.</li>
-        <li><strong>Filtering:</strong> Filter products by price or name (if implemented).</li>
-    </ul>
+### Prisma Setup
+```bash
+# Generate Prisma client
+npx prisma generate
 
-    <h2 id="screenshots">Screenshots</h2>
-    <p>(Add relevant screenshots of the application here)</p>
+# Run database migrations
+npx prisma migrate dev --name init
 
-    <h2 id="contributing">Contributing</h2>
-    <p>Contributions are welcome! Please fork the repository and submit a pull request for any changes or improvements.</p>
+# Optional: Seed database with sample data
+npx prisma db seed
+```
 
-    <h2 id="license">License</h2>
-    <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+## Running the Application
 
-</body>
-</html>
+### Development Mode
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:3000`
+
+### Production Build
+```bash
+npm run build
+npm start
+```
+
+## API Endpoints
+
+### Product Management
+- `POST /api/products/add`: Add a new cake product
+- `GET /api/products`: Retrieve all products (with pagination)
+- `PUT /api/products/[id]`: Update a product
+- `DELETE /api/products/[id]`: Delete a product
+
+## Testing
+
+### Run Tests
+```bash
+npm test
+```
+
+## Features
+- Create, Read, Update, Delete (CRUD) operations for cake products
+- Pagination for product listing
+- TypeScript support
+- Error handling
+- Server-side rendering
+
+## Bonus Features
+- Filtering products by price or name
+
+## Troubleshooting
+- Ensure all environment variables are correctly set
+- Check database connection
+- Verify Prisma migrations are up to date
+
+## Screenshots
+![image](https://github.com/user-attachments/assets/b203056b-4555-4e1a-ba19-6a9ccb92bd97)
+
+
+![image](https://github.com/user-attachments/assets/a2392c9f-5c0c-4ce0-b228-c334208e907b)
+
+
+![image](https://github.com/user-attachments/assets/4b51f6c1-ae7b-4bb7-8c95-788f3c1e7c2f)
+
+
+![image](https://github.com/user-attachments/assets/2d3a6ee1-d0e1-4697-9537-9784ec71f0b9)
+
+
+![image](https://github.com/user-attachments/assets/bed8508f-d074-4f83-98c8-9082ad20365a)
+
+
+![image](https://github.com/user-attachments/assets/a7e486b4-1c24-47c5-823f-d03bda68e30b)
+
+
+![image](https://github.com/user-attachments/assets/5956b648-79d1-4dfc-9c74-5302153e413b)
+
+
+![image](https://github.com/user-attachments/assets/39a0633f-f861-4213-bb9b-984886376aa2)
+
+
+![image](https://github.com/user-attachments/assets/6cef01f4-0f3a-4b06-8118-96f99bf4922a)
+
+
+![image](https://github.com/user-attachments/assets/c4655ebc-deb4-40b3-aa49-6bf7e1245321)
+
+
+![image](https://github.com/user-attachments/assets/126a22d9-6a0e-4106-b143-0812ffbbcdea)
+
+
+![image](https://github.com/user-attachments/assets/1ca0bd91-a323-4614-ae16-f78b10592705)
+
+
+![image](https://github.com/user-attachments/assets/41e1d23a-15fb-451c-bc74-fd91a9c109a4)
+
+
+
+## Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
