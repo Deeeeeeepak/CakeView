@@ -18,8 +18,8 @@ Before you begin, ensure you have the following installed:
 
 ## Clone the Repository
 ```bash
-git clone https://github.com/Deeeeeeepak/cake-shop-dashboard.git
-cd cake-shop-dashboard
+git clone https://github.com/Deeeeeeepak/CakeView.git
+cd CakeView
 ```
 
 ## Database Setup with Neon.tech
